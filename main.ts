@@ -11,9 +11,9 @@ const DROP_NUM = 4n, DROP_DEN = 100n;   // close >= 4% under the rolling high (m
 const TP_NUM = 1n, TP_DEN = 100n;       // take profit +1% from the entry fill
 const SL_NUM = 12n, SL_DEN = 1000n;     // stop loss -1.2% from the entry fill
 const HOLD_MAX = 240;                   // time stop: 240 bars (4h)
-const CUTOFF = 1300;                    // no new entries after bar 1300: room to exit before the end
+const CUTOFF = 1300;                    // reserves exit room before window end
 const FRAC_NUM = 95n, FRAC_DEN = 100n;  // deploy 95% of cash per buy
-const START_AT = 300;                   // warm-up before any signal
+const WARMUP_BARS = 300;                // warm-up before any signal
 const MAX_SLIPPAGE_BPS = 100;           // cap 1% past the close the order was decided on
 
 const ranges: bigint[] = [];   // every bar's (h - l) seen so far, for the percentile
@@ -59,7 +59,7 @@ function onBatch(state: BarsState, batch: Batch) {
   }
 
   // flat: look for a capitulation entry
-  if (batch.seq < START_AT || batch.seq >= CUTOFF || ranges.length < 100) return [];
+  if (batch.seq < WARMUP_BARS || batch.seq >= CUTOFF || ranges.length < 100) return [];
   const srt = [...ranges].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
   const th = srt[Math.floor((srt.length * Number(RNG_NUM)) / Number(RNG_DEN)) - 1];
   if (high - low < th) return [];
