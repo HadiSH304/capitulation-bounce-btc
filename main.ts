@@ -6,14 +6,14 @@
 import { runBars, type Bar, type BarsState, type Batch } from './vendor/makefun-bars.ts';
 
 // --- tunables (backtested on the published dev window; chosen at a plateau, not a spike) ---
-const RNG_NUM = 97n, RNG_DEN = 100n;    // signal bar's range >= 97th percentile of ranges seen
+const RNG_NUM = 96n, RNG_DEN = 100n;    // signal bar's range >= 96th percentile of ranges seen
 const DROP_NUM = 38n, DROP_DEN = 1000n;   // close >= 3.8% under the rolling high (max close so far)
 const TP_NUM = 1n, TP_DEN = 100n;       // take profit +1% from the entry fill
 const SL_NUM = 12n, SL_DEN = 1000n;     // stop loss -1.2% from the entry fill
 const HOLD_MAX = 300;                   // time stop: 300 bars (5h)
 const CUTOFF = 1300;                    // reserves exit room before window end
 const FRAC_NUM = 95n, FRAC_DEN = 100n;  // deploy 95% of cash per buy
-const WARMUP_BARS = 300;                // warm-up before any signal
+const WARMUP_BARS = 360;                // warm-up before any signal
 const MAX_SLIPPAGE_BPS = 100;           // cap 1% past the close the order was decided on
 
 const ranges: bigint[] = [];   // every bar's (h - l) seen so far, for the percentile
