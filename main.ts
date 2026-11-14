@@ -10,7 +10,7 @@ const RNG_NUM = 97n, RNG_DEN = 100n;    // signal bar's range >= 97th percentile
 const DROP_NUM = 38n, DROP_DEN = 1000n;   // close >= 3.8% under the rolling high (max close so far)
 const TP_NUM = 1n, TP_DEN = 100n;       // take profit +1% from the entry fill
 const SL_NUM = 12n, SL_DEN = 1000n;     // stop loss -1.2% from the entry fill
-const HOLD_MAX = 240;                   // time stop: 240 bars (4h)
+const HOLD_MAX = 300;                   // time stop: 300 bars (5h)
 const CUTOFF = 1300;                    // reserves exit room before window end
 const FRAC_NUM = 95n, FRAC_DEN = 100n;  // deploy 95% of cash per buy
 const WARMUP_BARS = 300;                // warm-up before any signal
