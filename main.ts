@@ -7,7 +7,7 @@ import { runBars, type Bar, type BarsState, type Batch } from './vendor/makefun-
 
 // --- tunables (backtested on the published dev window; chosen at a plateau, not a spike) ---
 const RNG_NUM = 97n, RNG_DEN = 100n;    // signal bar's range >= 97th percentile of ranges seen
-const DROP_NUM = 4n, DROP_DEN = 100n;   // close >= 4% under the rolling high (max close so far)
+const DROP_NUM = 38n, DROP_DEN = 1000n;   // close >= 3.8% under the rolling high (max close so far)
 const TP_NUM = 1n, TP_DEN = 100n;       // take profit +1% from the entry fill
 const SL_NUM = 12n, SL_DEN = 1000n;     // stop loss -1.2% from the entry fill
 const HOLD_MAX = 240;                   // time stop: 240 bars (4h)
